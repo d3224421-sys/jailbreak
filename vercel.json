@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "**/*", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/instructions.txt",
+      "headers": {
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex"
+      },
+      "dest": "/instructions.txt"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "no-referrer" }
+      ]
+    }
+  ]
+}
